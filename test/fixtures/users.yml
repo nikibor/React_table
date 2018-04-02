@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id         :integer          not null, primary key
+#  role_id    :integer
+#  status_id  :integer
+#  email      :string
+#  name       :string
+#  surname    :string
+#  birth      :date
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_role_id    (role_id)
+#  index_users_on_status_id  (status_id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  role: one
+  status: one
+  email: MyString
+  name: MyString
+  surname: MyString
+  birth: 2018-04-02
+
+two:
+  role: two
+  status: two
+  email: MyString
+  name: MyString
+  surname: MyString
+  birth: 2018-04-02
