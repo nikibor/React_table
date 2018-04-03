@@ -11,18 +11,9 @@ var Users = createReactClass({
                 </tr>
               </thead>
               <tbody>
-                  {
-                      users.forEach(function (user) {
-                          console.log(user.email);
-                          // React.createElement(User,{user: user});
-                      })
-                  }
-                  {React.createElement(User,{user: users[2]})}
-                  {React.createElement(User,{user: users[2]})}
-                  {React.createElement(User,{user: users[2]})}
+              <User user={users[2]}></User>
               </tbody>
           </table>
-
       </React.Fragment>
     );
   }
