@@ -3,7 +3,7 @@ var Users = createReactClass({
       users = JSON.parse(this.props.data);
     return (
       <React.Fragment>
-          <table>
+          <table className={'table'}>
               <thead>
                 <tr>
                     <th>ID</th>
@@ -14,11 +14,15 @@ var Users = createReactClass({
                   {
                       users.forEach(function (user) {
                           console.log(user.email);
+                          // React.createElement(User,{user: user});
                       })
                   }
+                  {React.createElement(User,{user: users[2]})}
+                  {React.createElement(User,{user: users[2]})}
+                  {React.createElement(User,{user: users[2]})}
               </tbody>
           </table>
-          {/*{React.render("User")}*/}
+
       </React.Fragment>
     );
   }
