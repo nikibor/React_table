@@ -9,5 +9,6 @@
 #
 
 class Status < ApplicationRecord
+  has_many :users
   validates :state, uniqueness: true, presence: true
 end
