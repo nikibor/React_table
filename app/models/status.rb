@@ -9,4 +9,5 @@
 #
 
 class Status < ApplicationRecord
+  validates :state, uniqueness: true, presence: true
 end
