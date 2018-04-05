@@ -1,17 +1,26 @@
 var User = createReactClass({
 
   render: function() {
-      let user = this.props.user;
+      var users = this.props.data;
+      var userTemplate = users.map(function (item, index) {
+          <div key={index}>
+              <td>
+                  <h6>{index}</h6>
+              </td>
+          </div>
+              {/*{alert(index)}*/}
+              {/*<td><h6>{item.role_id}</h6></td>*/}
+              {/*<td><h6>{item.status_id}</h6></td>*/}
+              {/*<td><h6>{item.email}</h6></td>*/}
+              {/*<td><h6>{item.name}</h6></td>*/}
+              {/*<td><h6>{item.surname}</h6></td>*/}
+              {/*<td><h6>{item.birth}</h6></td>*/}
+          {/*// </tr>*/}
+      });
     return (
       <React.Fragment>
           <tr>
-              <td><h6>{user.id}</h6></td>
-              <td><h6>{user.role_id}</h6></td>
-              <td><h6>{user.status_id}</h6></td>
-              <td><h6>{user.email}</h6></td>
-              <td><h6>{user.name}</h6></td>
-              <td><h6>{user.surname}</h6></td>
-              <td><h6>{user.birth}</h6></td>
+            {userTemplate}
           </tr>
       </React.Fragment>
     );

@@ -1,6 +1,19 @@
 var Users = createReactClass({
   render: function() {
-      let users = JSON.parse(this.props.data);
+      var users = JSON.parse(this.props.data);
+      var userTemplate = users.map(function(item, index) {
+          return (
+              <tr key={index}>
+                  <td className="news__author">{item.id}</td>
+                  <td className="news__author">{item.role_id}</td>
+                  <td className="news__author">{item.status_id}</td>
+                  <td className="news__author">{item.email}</td>
+                  <td className="news__author">{item.name}</td>
+                  <td className="news__author">{item.surname}</td>
+                  <td className="news__author">{item.birth}</td>
+              </tr>
+          )
+      });
       return <React.Fragment>
           <h3>Управление пользователями</h3>
           <table className={'table'}>
@@ -16,10 +29,7 @@ var Users = createReactClass({
               </tr>
               </thead>
               <tbody>
-                  <User user={users[0]}/>
-                  <User user={users[1]}/>
-                  <User user={users[2]}/>
-                  <User user={users[3]}/>
+                {userTemplate}
               </tbody>
           </table>
       </React.Fragment>;
