@@ -17,6 +17,11 @@
 #  index_users_on_role_id    (role_id)
 #  index_users_on_status_id  (status_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (role_id => roles.id)
+#  fk_rails_...  (status_id => statuses.id)
+#
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 

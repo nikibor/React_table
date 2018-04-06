@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20180402155715) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "roles", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -25,8 +28,8 @@ ActiveRecord::Schema.define(version: 20180402155715) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "role_id"
-    t.integer "status_id"
+    t.bigint "role_id"
+    t.bigint "status_id"
     t.string "email"
     t.string "name"
     t.string "surname"
@@ -37,4 +40,6 @@ ActiveRecord::Schema.define(version: 20180402155715) do
     t.index ["status_id"], name: "index_users_on_status_id"
   end
 
+  add_foreign_key "users", "roles"
+  add_foreign_key "users", "statuses"
 end

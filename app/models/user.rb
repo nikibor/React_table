@@ -17,10 +17,26 @@
 #  index_users_on_role_id    (role_id)
 #  index_users_on_status_id  (status_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (role_id => roles.id)
+#  fk_rails_...  (status_id => statuses.id)
+#
 
 class User < ApplicationRecord
   belongs_to :role
   belongs_to :status
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true
+
+  def as_json(options = nil){
+      id: id,
+      role: role.title,
+      status: status.state,
+      email: email,
+      name: name,
+      surname: surname,
+      birth: birth
+  }
+  end
 end
