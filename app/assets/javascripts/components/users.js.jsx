@@ -6,7 +6,8 @@ var Users = createReactClass({
             data: data,
             sorted: data,
             roles: [...new Set(data.map(item => item.role))],
-            statuses: [...new Set(data.map(item => item.status))]
+            statuses: [...new Set(data.map(item => item.status))],
+            perPage: 100
         };
     },
 
@@ -85,6 +86,11 @@ var Users = createReactClass({
               <option key={index}>{item}</option>
           )
       });
+      var paginationTemplate = [10,20,30,40,50,60,70,80,90,100].map(function(item, index) {
+          return (
+              <option key={index}>{item}</option>
+          )
+      });
       return <React.Fragment>
           <table className={'table table-bordered'}>
               <thead>
@@ -128,6 +134,15 @@ var Users = createReactClass({
               <tbody>
                 {userTemplate}
               </tbody>
+                  {/*<tbody style={{background: 'lightgray'}}>*/}
+                    {/*<tr>*/}
+                        {/*<td colSpan={3}><select className="form-control" id="InputPagination">*/}
+                            {/*{paginationTemplate}*/}
+                        {/*</select></td>*/}
+                        {/*<td colSpan={3}>Страница 1 из 10</td>*/}
+                        {/*<td>Найденно всего: {this.state.data.length}</td>*/}
+                    {/*</tr>*/}
+                  {/*</tbody>*/}
           </table>
       </React.Fragment>;
   }

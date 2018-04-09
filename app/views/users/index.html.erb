@@ -2,4 +2,5 @@
 <br/>
 <div class="col-md-10 offset-md-1">
   <%= react_component 'Users', { data: @users.to_json } %>
+  <%= paginate @users, theme: 'twitter-bootstrap-4' %>
 </div>
