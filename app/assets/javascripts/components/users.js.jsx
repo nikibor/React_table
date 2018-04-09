@@ -1,13 +1,16 @@
 var Users = createReactClass({
     getInitialState () {
+        data = JSON.parse(this.props.data);
         return {
             settings: {},
-            data: JSON.parse(this.props.data),
-            sorted: {}
+            data: data,
+            sorted: data,
+            roles: [...new Set(data.map(item => item.role))],
+            statuses: [...new Set(data.map(item => item.status))]
         };
     },
 
-    UpdateSettings(){
+    RefreshHandler(){
         this.setState({
             settings: {
                 role: document.getElementById('InputRole').value,
@@ -16,27 +19,49 @@ var Users = createReactClass({
                 name: document.getElementById('InputName').value,
                 surname: document.getElementById('InputSurname').value,
                 birth: document.getElementById('InputDate').value
-            }
-        });
-    },
-    SortTable(){
-        this.setState({
+            },
             sorted: this.state.data.filter(function (item) {
-                return item.status == 'Active';
+                return item.status == document.getElementById('InputStatus').value
+                    && item.role == document.getElementById('InputRole').value;
             })
         })
     },
 
-    RefreshHandler() {
-        this.UpdateSettings();
-        this.SortTable();
-        console.log(this.state.data);
+    EmailHandler(e){
+        if (e.key === 'Enter') {
+            this.setState({
+                sorted: this.state.data.filter(function (item) {
+                    return item.email.includes(document.getElementById('InputEmail').value);
+                })
+            })
+        }
+    },
+
+    NameHandler(e){
+        if (e.key === 'Enter') {
+            this.setState({
+                sorted: this.state.data.filter(function (item) {
+                    return item.email.includes(document.getElementById('InputName').value);
+                })
+            })
+        }
+    },
+
+    SurnameHandler(e){
+        if (e.key === 'Enter') {
+            this.setState({
+                sorted: this.state.data.filter(function (item) {
+                    return item.email.includes(document.getElementById('InputSurname').value);
+                })
+            })
+        }
     },
 
   render: function() {
-      var users = this.state.data;
-      let roles = [...new Set(users.map(item => item.role))];
-      let statuses = [...new Set(users.map(item => item.status))];
+      console.log(this.state.settings);
+      var users = this.state.sorted;
+      let roles = this.state.roles;
+      let statuses = this.state.statuses;
       var userTemplate = users.map(function(item, index) {
           return (
               <tr key={index}>
@@ -60,7 +85,6 @@ var Users = createReactClass({
               <option key={index}>{item}</option>
           )
       });
-
       return <React.Fragment>
           <table className={'table table-bordered'}>
               <thead>
@@ -88,13 +112,13 @@ var Users = createReactClass({
                       </select>
                   </th>
                   <th>
-                      <input type="email" className="form-control" id="InputEmail" placeholder="E-mail"/>
+                      <input type="email" className="form-control" id="InputEmail" onKeyPress={this.EmailHandler} placeholder="E-mail"/>
                   </th>
                   <th>
-                      <input type="text" className="form-control" id="InputName" placeholder="Имя"/>
+                      <input type="text" className="form-control" id="InputName" onKeyPress={this.NameHandler} placeholder="Имя"/>
                   </th>
                   <th>
-                      <input type="text" className="form-control" id="InputSurname" placeholder="Фамилия"/>
+                      <input type="text" className="form-control" id="InputSurname" onKeyPress={this.SurnameHandler} placeholder="Фамилия"/>
                   </th>
                   <th>
                       <input type="date" className="form-control" id="InputDate"/>
