@@ -1,6 +1,40 @@
 var Users = createReactClass({
+    getInitialState () {
+        return {
+            settings: {},
+            data: JSON.parse(this.props.data),
+            sorted: {}
+        };
+    },
+
+    UpdateSettings(){
+        this.setState({
+            settings: {
+                role: document.getElementById('InputRole').value,
+                status: document.getElementById('InputStatus').value,
+                email: document.getElementById('InputEmail').value,
+                name: document.getElementById('InputName').value,
+                surname: document.getElementById('InputSurname').value,
+                birth: document.getElementById('InputDate').value
+            }
+        });
+    },
+    SortTable(){
+        this.setState({
+            sorted: this.state.data.filter(function (item) {
+                return item.status == 'Active';
+            })
+        })
+    },
+
+    RefreshHandler() {
+        this.UpdateSettings();
+        this.SortTable();
+        console.log(this.state.data);
+    },
+
   render: function() {
-      var users = JSON.parse(this.props.data);
+      var users = this.state.data;
       let roles = [...new Set(users.map(item => item.role))];
       let statuses = [...new Set(users.map(item => item.status))];
       var userTemplate = users.map(function(item, index) {
@@ -28,7 +62,7 @@ var Users = createReactClass({
       });
 
       return <React.Fragment>
-          <table className={'table'}>
+          <table className={'table table-bordered'}>
               <thead>
               <tr>
                   <th>#</th>
@@ -40,7 +74,9 @@ var Users = createReactClass({
                   <th>Дата рождения</th>
               </tr>
               <tr>
-                  <th>#</th>
+                  <th>
+                      <button className={'btn btn-primary'} id="Refresh" onClick={this.RefreshHandler}>Обновить</button>
+                  </th>
                   <th>
                       <select className="form-control" id="InputRole">
                           {rolesTemplate}
