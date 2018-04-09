@@ -18,16 +18,16 @@ var Users = createReactClass({
       });
       var rolesTemplate = roles.map(function(item, index) {
           return (
-              <a class="dropdown-item" href="#">{item}</a>
+              <option key={index}>{item}</option>
           )
       });
       var statusesTemplate = statuses.map(function(item, index) {
           return (
-              <a class="dropdown-item" href="#">{item}</a>
+              <option key={index}>{item}</option>
           )
       });
+
       return <React.Fragment>
-          {console.log(users)}
           <table className={'table'}>
               <thead>
               <tr>
@@ -42,36 +42,26 @@ var Users = createReactClass({
               <tr>
                   <th>#</th>
                   <th>
-                      <div class="dropdown">
-                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Роли
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              {rolesTemplate}
-                          </div>
-                      </div>
+                      <select className="form-control" id="InputRole">
+                          {rolesTemplate}
+                      </select>
                   </th>
                   <th>
-                      <div class="dropdown">
-                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Статусы
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              {statusesTemplate}
-                          </div>
-                      </div>
+                      <select className="form-control" id="InputStatus">
+                          {statusesTemplate}
+                      </select>
                   </th>
                   <th>
-                      <input type="email" class="form-control" id="InputEmail" placeholder="E-mail"/>
+                      <input type="email" className="form-control" id="InputEmail" placeholder="E-mail"/>
                   </th>
                   <th>
-                      <input type="text" class="form-control" id="InputName" placeholder="Имя"/>
+                      <input type="text" className="form-control" id="InputName" placeholder="Имя"/>
                   </th>
                   <th>
-                      <input type="text" class="form-control" id="InputSurname" placeholder="Фамилия"/>
+                      <input type="text" className="form-control" id="InputSurname" placeholder="Фамилия"/>
                   </th>
                   <th>
-                      <input type="date" class="form-control" id="InputDate"/>
+                      <input type="date" className="form-control" id="InputDate"/>
                   </th>
               </tr>
               </thead>
