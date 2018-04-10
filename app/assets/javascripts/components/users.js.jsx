@@ -7,9 +7,20 @@ var Users = createReactClass({
             sorted: data,
             roles: [...new Set(data.map(item => item.role))],
             statuses: [...new Set(data.map(item => item.status))],
-            perPage: 100
         };
     },
+
+    SortId(e){
+        if(document.getElementById(e.target.id).innerText === '▼'){
+            document.getElementById(e.target.id).innerText = '▲';
+            this.setState({sorted: this.state.data.sort(function (A, B) {return A.id - B.id;})});
+        } else{
+            document.getElementById(e.target.id).innerText = '▼';
+            this.setState({sorted: this.state.data.sort(function (A, B) {return B.id - A.id;})});
+        }
+    },
+
+
 
     RefreshHandler(){
         this.setState({
@@ -59,7 +70,6 @@ var Users = createReactClass({
     },
 
   render: function() {
-      console.log(this.state.settings);
       var users = this.state.sorted;
       let roles = this.state.roles;
       let statuses = this.state.statuses;
@@ -86,16 +96,16 @@ var Users = createReactClass({
               <option key={index}>{item}</option>
           )
       });
-      var paginationTemplate = [10,20,30,40,50,60,70,80,90,100].map(function(item, index) {
-          return (
-              <option key={index}>{item}</option>
-          )
-      });
       return <React.Fragment>
           <table className={'table table-bordered'}>
               <thead>
               <tr>
-                  <th>#</th>
+                  <th>
+                      <div className={'btn-group'}>
+                          <div className={'col-md-10'}>#</div>
+                          <div id='sortId' className={'col-md-2'} onClick={this.SortId}>▲</div>
+                      </div>
+                  </th>
                   <th>Роли</th>
                   <th>Статус</th>
                   <th>E-mail</th>
@@ -134,15 +144,6 @@ var Users = createReactClass({
               <tbody>
                 {userTemplate}
               </tbody>
-                  {/*<tbody style={{background: 'lightgray'}}>*/}
-                    {/*<tr>*/}
-                        {/*<td colSpan={3}><select className="form-control" id="InputPagination">*/}
-                            {/*{paginationTemplate}*/}
-                        {/*</select></td>*/}
-                        {/*<td colSpan={3}>Страница 1 из 10</td>*/}
-                        {/*<td>Найденно всего: {this.state.data.length}</td>*/}
-                    {/*</tr>*/}
-                  {/*</tbody>*/}
           </table>
       </React.Fragment>;
   }
